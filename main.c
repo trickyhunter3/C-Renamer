@@ -24,7 +24,8 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Error: There Is No Arguments");
+        printf("Error: There Are No Arguments\n");
+        Description();
         return 1;
     }    
     return 0;

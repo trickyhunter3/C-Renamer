@@ -9,6 +9,6 @@ void ChangeNameV1(char *argv[])
     //              Function     GetNumbersOutOfString      are to be renamed  
     //                           (V2 is default 1)
 
-    
+
 
 }

@@ -7,7 +7,7 @@ enum FunctionsFormat
 
 void Description()
 {
-    printf("Description:\n");
+    printf(".exe {Argument}:\n");
     printf("0-->Description\n");
     printf("1-->ChangeV1\n");
     printf("2-->ChangeV2\n");
