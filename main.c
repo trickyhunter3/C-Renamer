@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
             Description();
             break;
         case ChangeV1:
-            ChangeNameV1(argv)
+            ChangeNameV1(argv);
             break;
         default:
             break;
