@@ -3,12 +3,16 @@
 
 int main(int argc, char *argv[])
 {
-    int numbersCount = CountNumbersInAString(argv[1]);
-    int *nums = GetNumberOutOfString(argv[1], numbersCount);
-    for(int i = 0; i < numbersCount; i++)
+    if(argc > 1)
     {
-        printf("%d\n", *(nums + i));
+        int numbersCount = CountNumbersInAString(argv[1]);
+        int num = GetNumberOutOfString(argv[1], numbersCount, false, false);
+        printf("%d\n", num);
     }
-    
+    else
+    {
+        printf("Error: There Is No Arguments");
+        return 1;
+    }    
     return 0;
 }
