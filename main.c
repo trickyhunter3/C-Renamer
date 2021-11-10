@@ -13,14 +13,7 @@ int main(int argc, char *argv[])
         case ChangeV1:
             ChangeNameV1(argv);
             break;
-        default:
-            break;
         }
-        /*
-        int numbersCount = CountNumbersInAString(argv[1]);
-        int num = GetNumberOutOfString(argv[1], numbersCount, false, false);
-        printf("%d\n", num);
-        */
     }
     else
     {

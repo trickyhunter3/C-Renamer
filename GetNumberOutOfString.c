@@ -1,11 +1,11 @@
 #include "includeAll.h"
 
-int GetNumberOutOfString(char *fileName, int numOfNums, bool isFirst, bool isLast)
+int GetNumberOutOfString(char *filename, int numOfNums, bool isFirst, bool isLast)
 {
     if(!numOfNums)
         return -1;//no number found
     
-    char *p = fileName;
+    char *p = filename;
     int i = 0;
     int arr[numOfNums];
     
@@ -32,7 +32,7 @@ int GetNumberOutOfString(char *fileName, int numOfNums, bool isFirst, bool isLas
     {
         if(arr[i] == 0)
             number_holder = 0;
-        switch (arr[i])
+        switch (arr[i])//filter numbers
         {
             case 480:
             case 640:

@@ -1,8 +1,8 @@
 #include "includeAll.h"
 
-int CountNumbersInAString(char *fileName)
+int CountNumbersInAString(char *filename)
 {
-    char *p = fileName;
+    char *p = filename;
     int count = 0;
     while (*p) //count how much numbers in the name
     {
