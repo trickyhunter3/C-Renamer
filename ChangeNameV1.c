@@ -1,6 +1,7 @@
 #include "includeAll.h"
 #include "IsFilterFilename.c"
 #include "GetHighestLengthStingInADirectory.c"
+#include "GetFileNameExt.c"
 
 #define ENOUGH ((CHAR_BIT * sizeof(int) - 1) / 3 + 2)
 
@@ -31,12 +32,12 @@ void ChangeNameV1(char *argv[])
         if (d)
         {
             //make 2 copys of the current path for the new and old name;
-            char *oldName = malloc(strlen(token) + strlen(token));
-            char *newName = malloc(strlen(token) + 8);
+            char *oldName = malloc(strlen(token) + GetHighestLengthStingInADirectory(d, token) + 1);//allocate enough memory
+            char *newName = malloc(strlen(token) + 13);//max 12 characters total so 9 numbers left (for the newName)
             strcpy(oldName, token);
             strcpy(newName, token);
 
-            printf("dir:%s\n", token);
+            printf("dir: %s\n", token);
             while ((dir = readdir(d)) != NULL)
             {
                 //filter unwanted names
@@ -49,7 +50,8 @@ void ChangeNameV1(char *argv[])
                 // convert int to string
                 char str[ENOUGH];//TODO: int nDigits = floor(log10(abs(the_integer))) + 1; 
                 sprintf(str, "%d", number);
-                strcat(str, ".txt");
+                strcat(str, ".");
+                strcat(str, GetFileNameExt(dir->d_name));
 
                 //add the files name to the current pWath
                 strcat(oldName, (dir->d_name));
