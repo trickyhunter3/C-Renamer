@@ -5,6 +5,7 @@ int main(int argc, char *argv[])
 {
     if(argv[1])
     {
+        char *name;
         switch (atoi(argv[1]))
         {
         case ChangeV1:

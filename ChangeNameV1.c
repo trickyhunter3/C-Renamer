@@ -2,6 +2,7 @@
 #include "IsFilterFilename.c"
 #include "GetHighestLengthStingInADirectory.c"
 #include "GetFileNameExt.c"
+#include "LastChr.c"
 
 #define ENOUGH ((CHAR_BIT * sizeof(int) - 1) / 3 + 2)
 
@@ -31,11 +32,30 @@ void ChangeNameV1(char *argv[])
 
         if (d)
         {
-            //make 2 copys of the current path for the new and old name;
-            char *oldName = malloc(strlen(token) + GetHighestLengthStingInADirectory(d, token) + 1);//allocate enough memory
-            char *newName = malloc(strlen(token) + 13);//max 12 characters total so 9 numbers left (for the newName)
-            strcpy(oldName, token);
-            strcpy(newName, token);
+            char *currentPath;//only if '\\' is not in the end
+            char *oldName;
+            char *newName;
+            if(LastChr(token) != '\\')
+            {
+                //if the last letter not a '\\'
+                currentPath = malloc(strlen(token) + 2);//'\0' and '\\' i need to add so 2
+                strcpy(currentPath, token);
+                strcat(currentPath, "\\");
+
+                //make 2 copys of the current path for the new and old name;
+                oldName = malloc(strlen(currentPath) + GetHighestLengthStingInADirectory(d, currentPath) + 1);//allocate enough memory
+                newName = malloc(strlen(currentPath) + 13);//max 12 characters total so 9 numbers left (for the newName)
+                strcpy(oldName, currentPath);
+                strcpy(newName, currentPath);
+            }
+            else
+            {
+                //make 2 copys of the current path for the new and old name;
+                oldName = malloc(strlen(token) + GetHighestLengthStingInADirectory(d, token) + 1);//allocate enough memory
+                newName = malloc(strlen(token) + 13);//max 12 characters total so 9 numbers left (for the newName)
+                strcpy(oldName, token);
+                strcpy(newName, token);
+            }
 
             printf("dir: %s\n", token);
             while ((dir = readdir(d)) != NULL)
@@ -65,13 +85,22 @@ void ChangeNameV1(char *argv[])
                     printf("Error: %s: %s\n", strerror(errno), dir->d_name);
 
                 //reset the value to the current path
-                strcpy(oldName, token);
-                strcpy(newName, token);
+                if(currentPath)
+                {
+                    strcpy(oldName, currentPath);
+                    strcpy(newName, currentPath);
+                }
+                else
+                {
+                    strcpy(oldName, token);
+                    strcpy(newName, token);
+                }
             }
             //close directory
             closedir(d);
             
             //free memory (used malloc)
+            free(currentPath);
             free(oldName);
             free(newName);
         }
