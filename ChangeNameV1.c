@@ -8,7 +8,7 @@
 void ChangeNameV1(char *argv[])
 {
     //        argv[0]  argv[1]   argv[2]                            argv[3]
-    //format --> .exe 1          "path1,path2,path3..."             0/1
+    //format --> .exe 0          "path1,path2,path3..."             0/1
     //                ^          ^                                   ^
     //              this         place where the files          Function to 
     //              Function     are to be renamed              GetNumbersOutOfString
@@ -18,7 +18,7 @@ void ChangeNameV1(char *argv[])
 
     if(!argv[2])
     {
-        printf("Error: ChangeNameV1 - No Path Was Provided");
+        printf(".exe 0 \"Path1|Path2\" 0/1     //(1 is default)");
         return;
     }
     char *token = strtok(argv[2], "|");//Split paths into an array

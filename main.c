@@ -3,21 +3,19 @@
 
 int main(int argc, char *argv[])
 {
-    if(argc > 1)
+    if(argv[1])
     {
         switch (atoi(argv[1]))
         {
-        case Desc:
-            Description();
-            break;
         case ChangeV1:
             ChangeNameV1(argv);
             break;
+        default:
+            Description();
         }
     }
     else
     {
-        printf("Error: There Are No Arguments\n");
         Description();
         return 1;
     }    
