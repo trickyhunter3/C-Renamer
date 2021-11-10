@@ -32,9 +32,7 @@ void ChangeNameV1(char *argv[])
 
         if (d)
         {
-            char *currentPath;//only if '\\' is not in the end
-            char *oldName;
-            char *newName;
+            char *currentPath = NULL, *oldName, *newName;
             if(LastChr(token) != '\\')
             {
                 //if the last letter not a '\\'
@@ -44,7 +42,7 @@ void ChangeNameV1(char *argv[])
 
                 //make 2 copys of the current path for the new and old name;
                 oldName = malloc(strlen(currentPath) + GetHighestLengthStingInADirectory(d, currentPath) + 1);//allocate enough memory
-                newName = malloc(strlen(currentPath) + 13);//max 12 characters total so 9 numbers left (for the newName)
+                newName = malloc(strlen(currentPath) + 13);//max 12 characters total so 8 numbers left (for the newName)
                 strcpy(oldName, currentPath);
                 strcpy(newName, currentPath);
             }
@@ -52,7 +50,7 @@ void ChangeNameV1(char *argv[])
             {
                 //make 2 copys of the current path for the new and old name;
                 oldName = malloc(strlen(token) + GetHighestLengthStingInADirectory(d, token) + 1);//allocate enough memory
-                newName = malloc(strlen(token) + 13);//max 12 characters total so 9 numbers left (for the newName)
+                newName = malloc(strlen(token) + 13);//max 12 characters total so 8 numbers left (for the newName)
                 strcpy(oldName, token);
                 strcpy(newName, token);
             }
@@ -85,7 +83,7 @@ void ChangeNameV1(char *argv[])
                     printf("Error: %s: %s\n", strerror(errno), dir->d_name);
 
                 //reset the value to the current path
-                if(currentPath)
+                if(currentPath != NULL)
                 {
                     strcpy(oldName, currentPath);
                     strcpy(newName, currentPath);
