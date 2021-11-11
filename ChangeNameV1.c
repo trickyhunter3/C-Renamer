@@ -8,21 +8,48 @@
 
 void ChangeNameV1(char *argv[])
 {
-    //        argv[0]  argv[1]   argv[2]                            argv[3]
-    //format --> .exe 0          "path1,path2,path3..."             0/1
-    //                ^          ^                                   ^
-    //              this         place where the files          Function to 
-    //              Function     are to be renamed              GetNumbersOutOfString
-    //                                                          (V2 is default -> 1)
+    //        argv[0]  argv[1]   argv[2]                           argv[3]                argv[4]                       argv[5]
+    //format --> .exe 0          "path1,path2,path3..."          is the number first?      is the number last?           0/1
+    //                ^          ^                                  1-yes            1-yes                              ^   
+    //              this         place where the files              0-no             0-no                            Function to 
+    //              Function     are to be renamed                                                                  GetNumbersOutOfString
+    //                                                                                                              (V2 is default -> 1)
 
     //for now only one function of GetNumber (V1) 11/9/2021
 
     if(!argv[2])
     {
-        printf(".exe 0 \"Path1|Path2\" 0/1     //(1 is default)");
+        printf("example: .exe 0 \"Path1|Path2\" 0/1 0/1 0/1\n");
+        printf("first 0/1 is The version of GetNumberOutOfString\n");
+        printf("second 0/1 is returning the first number found in GetNumberOutOfString\n");
+        printf("third 0/1 is returning the last number found in GetNumberOutOfString\n");
         return;
     }
     char *token = strtok(argv[2], "|");//Split paths into an array
+
+    bool isLastNoIntialize = true;
+    char *isFirst;
+    char *isLast;
+
+    if(!argv[3])
+    {
+        isFirst = "0";
+    }
+    else
+    {
+        isFirst = argv[3];
+
+        if(!argv[4])
+            isLast = "0";
+        else 
+            isLast = argv[4];
+        isLastNoIntialize = false;
+    }
+
+    if(isLastNoIntialize)
+    {
+        isLast = "0";
+    }
 
     while( token != NULL ) 
     {
@@ -63,10 +90,10 @@ void ChangeNameV1(char *argv[])
                 
                 //Get the number to be renamed into
                 int numOfNums = CountNumbersInAString(dir->d_name);
-                int number = GetNumberOutOfString(dir->d_name, numOfNums, false, false);
+                int number = GetNumberOutOfString(dir->d_name, numOfNums, isFirst, isLast);
                 
                 // convert int to string
-                char str[ENOUGH];//TODO: int nDigits = floor(log10(abs(the_integer))) + 1; 
+                char str[ENOUGH];
                 sprintf(str, "%d", number);
                 strcat(str, ".");
                 strcat(str, GetFileNameExt(dir->d_name));

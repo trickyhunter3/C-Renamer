@@ -1,6 +1,6 @@
 #include "includeAll.h"
 
-int GetNumberOutOfString(char *filename, int numOfNums, bool isFirst, bool isLast)
+int GetNumberOutOfString(char *filename, int numOfNums, char *isFirst, char *isLast)
 {
     if(!numOfNums)
         return -1;//no number found
@@ -19,11 +19,14 @@ int GetNumberOutOfString(char *filename, int numOfNums, bool isFirst, bool isLas
         }
         else p++;
     }
-
-    if(isFirst)
+    if(!strcmp(isFirst, "1"))
+    {
         return arr[0];//first number
-    if(isLast)
+    };
+    if(!strcmp(isLast, "1"))
+    {
         return arr[numOfNums - 1];//last number
+    };
 
     bool currentNumberTaken = false;
     int converted = 0;
